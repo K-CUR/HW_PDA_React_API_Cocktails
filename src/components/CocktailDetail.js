@@ -2,6 +2,7 @@ import React from "react";
 
 const CocktailDetail = ({selectedCocktail}) => {
 
+
 return(
     <>
     <h2>The {selectedCocktail.strDrink}</h2>
