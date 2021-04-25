@@ -8,12 +8,7 @@ const CocktailContainer = ({cocktailTypes}) => {
     const [cocktails, setCocktails] = useState([]);
     const [selectedCocktail, setSelectedCocktail] = useState(null);
 
-
-    // useEffect to prevent constant re-rerender
-    // useEffect (() => {
-    //     fetchCocktails(cocktailTypes[0].url);
-    // },[cocktailTypes])
-
+    // useEffects
     useEffect (() => {
         fetchCocktails(cocktailTypes[0].url)
     },[cocktailTypes])
@@ -27,25 +22,22 @@ const CocktailContainer = ({cocktailTypes}) => {
     const fetchCocktails = url => {
         fetch(url)
         .then(res => res.json())
-        // .then(data => [data])
         .then(data => setCocktails(data.drinks))
-        // .then(data => setCocktails(data))
-        // .then(data => console.log(data))
+
     }
 
-    // const loadSongs = url => {
-    //     fetch(url)
-    //       .then(res => res.json())
-    //       .then(songsList => setSongs(songsList.feed.entry))
-    //       .catch(err => console.error);
+    // handleSelectChange for drop down in ChooseType.
+    // Decided against and went for clickable images instead
+    // const handleSelectChange = (event) => {
+    //     fetchCocktails(event.target.value);
+    // }
 
-
-    // handleSelectChange for toggle 
-    const handleSelectChange = (event) => {
+    // handleSelect for clickable images in ChooseType
+    const handleSelect = (event) => {
         fetchCocktails(event.target.value);
     }
 
-    // onClick for viewing single cocktail
+    // onClick for viewing cocktail from menu and see receipe etc
     const onCocktailClick = (cocktail) => {
         setSelectedCocktail(cocktail);
     }
@@ -53,8 +45,8 @@ const CocktailContainer = ({cocktailTypes}) => {
 
     return(
         <>
-        <ChooseType cocktailTypes={cocktailTypes} handleSelectChange={handleSelectChange} />
-        {cocktails ? <CocktailBar cocktails={cocktails} onCocktailClick={onCocktailClick} /> :null}
+        <ChooseType cocktailTypes={cocktailTypes}  handleSelect={handleSelect} />
+        <CocktailBar cocktails={cocktails} onCocktailClick={onCocktailClick} />
         {selectedCocktail ? <CocktailDetail selectedCocktail={selectedCocktail} /> :null}
         </>
     )

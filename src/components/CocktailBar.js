@@ -11,7 +11,7 @@ const CocktailBar = ({cocktails, onCocktailClick}) => {
 
     return(
         <div>
-            <h1>Menu</h1>
+            <h2>Menu</h2>
             <ul>
                 {cocktailItems}
             </ul>
